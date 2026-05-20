@@ -1,0 +1,218 @@
+---
+const lastUpdated = "May 20, 2025";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Privacy Policy – Onigiri Sensei</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #fafaf8;
+        color: #1a1a1a;
+        line-height: 1.7;
+        padding: 2rem 1rem 4rem;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e5e5e0;
+      }
+
+      .app-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #111;
+        line-height: 1.2;
+      }
+
+      .meta {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #888;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #111;
+        margin-top: 2.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        margin-bottom: 0.75rem;
+        color: #333;
+      }
+
+      ul {
+        margin: 0.5rem 0 0.75rem 1.25rem;
+        color: #333;
+      }
+
+      li {
+        margin-bottom: 0.35rem;
+      }
+
+      a {
+        color: #d05a2b;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .section {
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight-box {
+        background: #fff8f0;
+        border-left: 3px solid #d05a2b;
+        padding: 0.9rem 1.1rem;
+        border-radius: 0 6px 6px 0;
+        margin: 1rem 0;
+        font-size: 0.925rem;
+        color: #444;
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e5e0;
+        font-size: 0.875rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <p class="app-name">Onigiri Sensei</p>
+        <h1>Privacy Policy</h1>
+        <p class="meta">Last updated: {lastUpdated}</p>
+      </header>
+
+      <div class="highlight-box">
+        <strong>Short version:</strong> Onigiri Sensei does not collect personal information. Your learning progress, settings, and nickname stay on your device. We use standard third-party services (Firebase, AdMob) for analytics, crash reporting, and advertising.
+      </div>
+
+      <div class="section">
+        <h2>1. Who We Are</h2>
+        <p>Onigiri Sensei is developed and operated by <strong>NiteBunny Inc.</strong> This policy explains how we handle information when you use our mobile application.</p>
+        <p>If you have any questions, contact us at <a href="mailto:hello@onigirisensei.app">hello@onigirisensei.app</a>.</p>
+      </div>
+
+      <div class="section">
+        <h2>2. Information We Do Not Collect</h2>
+        <p>We do not collect, store, or transmit:</p>
+        <ul>
+          <li>Your name, email address, or any account credentials</li>
+          <li>Your learning progress, mastery levels, or quiz results</li>
+          <li>Your app settings or preferences</li>
+          <li>Your nickname (it is stored only on your device and never sent to any server)</li>
+        </ul>
+        <p>All of the above is stored locally on your device using an encrypted local storage library and is fully under your control. Deleting the app removes all of it.</p>
+      </div>
+
+      <div class="section">
+        <h2>3. Information Collected by Third-Party Services</h2>
+        <p>We integrate third-party services that may collect certain information automatically. We do not have direct access to raw device identifiers — this data is processed by each provider under their own privacy policies.</p>
+
+        <h2>Firebase Analytics</h2>
+        <p>We use Google Firebase Analytics to understand how users interact with the app. This service collects:</p>
+        <ul>
+          <li>Anonymous usage events (e.g., a deck was started, a round was completed, a setting was changed)</li>
+          <li>General device information (OS version, device model, app version)</li>
+          <li>A Firebase-assigned installation ID (not linked to any personal identity)</li>
+        </ul>
+        <p>We do not send your nickname or any personally identifiable information to Firebase Analytics. Events include only gameplay data (e.g., number of correct answers, deck IDs).</p>
+        <p><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy →</a></p>
+
+        <h2>Firebase Crashlytics</h2>
+        <p>Crashlytics collects crash reports when the app unexpectedly closes. Reports include stack traces and device state at the time of the crash (OS version, device model, memory state). No personal information is included in crash reports.</p>
+        <p><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy →</a></p>
+
+        <h2>Google AdMob</h2>
+        <p>We display ads through Google AdMob to support the free version of the app. AdMob may collect:</p>
+        <ul>
+          <li>Your device's advertising identifier (IDFA on iOS, GAID on Android)</li>
+          <li>Ad interaction data (impressions, clicks)</li>
+          <li>Approximate location (derived from IP address)</li>
+        </ul>
+        <p>On iOS, we request permission to use your advertising identifier via Apple's App Tracking Transparency prompt. You may decline, and the app will still work — you will simply see non-personalized ads.</p>
+        <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></p>
+
+        <h2>In-App Purchases</h2>
+        <p>Purchases are processed entirely by the Google Play Store or Apple App Store. We do not receive or store your payment information. A record of which decks you have purchased is kept locally on your device.</p>
+      </div>
+
+      <div class="section">
+        <h2>4. Feedback</h2>
+        <p>The app includes an optional feedback form. If you choose to submit feedback, the text you enter is sent to a Google Firebase Firestore database. No name, email, or account information is attached — feedback is completely anonymous. We use it only to improve the app.</p>
+      </div>
+
+      <div class="section">
+        <h2>5. Children's Privacy</h2>
+        <p>Onigiri Sensei is a Japanese language learning app suitable for all ages. We do not knowingly collect personal information from children under 13. Because the app does not require registration or any personal data to function, it is safe for use by children.</p>
+        <p>Please note that Google AdMob may serve ads to all users. Parents who prefer an ad-free experience can unlock content through in-app purchase.</p>
+        <p>If you are a parent or guardian and believe your child has submitted information through the feedback form, please contact us at <a href="mailto:hello@onigirisensei.app">hello@onigirisensei.app</a> and we will delete it promptly.</p>
+      </div>
+
+      <div class="section">
+        <h2>6. Data Retention</h2>
+        <p>Anonymous analytics and crash report data is retained by Firebase according to Google's standard retention policies. Anonymous feedback submitted via the in-app form is automatically deleted after 12 months.</p>
+        <p>All local device data (nickname, progress, settings) is deleted when you uninstall the app.</p>
+      </div>
+
+      <div class="section">
+        <h2>7. Your Rights</h2>
+        <p>Because we do not collect personal information tied to your identity, there is no profile for us to look up, export, or delete. You can:</p>
+        <ul>
+          <li><strong>Reset all local data</strong> by uninstalling the app</li>
+          <li><strong>Opt out of personalized ads</strong> on iOS via the App Tracking Transparency prompt, or on Android via your device's Ads settings</li>
+          <li><strong>Disable Firebase Analytics</strong> collection is not currently available as an in-app toggle, but you can limit ad tracking via your device settings</li>
+        </ul>
+        <p>If you are in the EU/EEA and have specific GDPR requests, contact us at <a href="mailto:hello@onigirisensei.app">hello@onigirisensei.app</a>.</p>
+      </div>
+
+      <div class="section">
+        <h2>8. Changes to This Policy</h2>
+        <p>If we make material changes to this policy, we will update the "Last updated" date at the top of this page. We encourage you to review this page periodically.</p>
+      </div>
+
+      <div class="section">
+        <h2>9. Contact</h2>
+        <p>NiteBunny Inc.<br />
+        <a href="mailto:hello@onigirisensei.app">hello@onigirisensei.app</a></p>
+      </div>
+
+      <footer>
+        <p>&copy; {new Date().getFullYear()} NiteBunny Inc. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>
