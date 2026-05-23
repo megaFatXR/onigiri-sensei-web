@@ -1,17 +1,652 @@
 ---
-
+import { Image } from 'astro:assets';
+import cardHanasu from '../assets/card-hanasu.png';
+import cardIku from '../assets/card-iku.png';
+import cardImasu from '../assets/card-imasu.png';
+import cardMiru from '../assets/card-miru.png';
+import cardOkiru from '../assets/card-okiru.png';
+import cardOokii from '../assets/card-ookii.png';
+import screenCardFlipped from '../assets/screen-card-flipped.png';
+import screenQuiz from '../assets/screen-quiz.png';
+import screenStatsOverall from '../assets/screen-stats-overall.png';
+import screenStatsWord from '../assets/screen-stats-word.png';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="generator" content={Astro.generator} />
+  <title>Onigiri Sensei — Learn Japanese</title>
+  <meta name="description" content="Learn Japanese with Onigiri Sensei — illustrated vocabulary cards and conjugation drills with your adorable rice ball guide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:    #FDF6E8;
+      --cream-mid: #F5E9CF;
+      --cream-deep: #EDDAB4;
+      --gold:     #C8943A;
+      --gold-dark: #B07D2E;
+      --brown:    #2C1A06;
+      --brown-mid: #7A5428;
+      --dark:     #0E0E0E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253, 246, 232, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200, 148, 58, 0.15);
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--brown);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: calc(100vh - 60px);
+      background: linear-gradient(150deg, #FEF8EE 0%, var(--cream-mid) 55%, var(--cream-deep) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      gap: 60px;
+    }
+
+    .hero-text {
+      max-width: 500px;
+      flex-shrink: 0;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 20px;
+    }
+
+    .hero-h1 {
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 900;
+      color: var(--brown);
+      line-height: 1.06;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--brown-mid);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 400px;
+    }
+
+    .app-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brown);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .app-store-btn:hover {
+      background: #1a0a00;
+      transform: translateY(-2px);
+    }
+
+    .app-store-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* hero cards — floating fan on the right */
+    .hero-cards {
+      position: relative;
+      width: 340px;
+      height: 420px;
+      flex-shrink: 0;
+    }
+
+    .hero-cards img {
+      position: absolute;
+      filter: drop-shadow(0 20px 50px rgba(90, 50, 0, 0.22));
+    }
+
+    .hero-cards img:nth-child(1) {
+      width: 200px;
+      left: 0;
+      bottom: 0;
+      transform: rotate(-10deg);
+      z-index: 1;
+    }
+
+    .hero-cards img:nth-child(2) {
+      width: 230px;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .hero-cards img:nth-child(3) {
+      width: 200px;
+      right: 0;
+      bottom: 0;
+      transform: rotate(10deg);
+      z-index: 1;
+    }
+
+    /* hide cards on small screens */
+    @media (max-width: 860px) {
+      .hero { flex-direction: column; text-align: center; }
+      .hero-text { max-width: 100%; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-cards { width: 280px; height: 340px; }
+      .hero-cards img:nth-child(2) { width: 190px; }
+      .hero-cards img:nth-child(1),
+      .hero-cards img:nth-child(3) { width: 165px; }
+    }
+
+    /* ─── SCREENSHOTS SECTION ─── */
+    .screenshots-section {
+      background: var(--dark);
+      padding: 80px 0 100px;
+    }
+
+    .screenshots-heading {
+      text-align: center;
+      padding: 0 40px;
+      margin-bottom: 56px;
+    }
+
+    .screenshots-heading h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .screenshots-heading p {
+      font-size: 17px;
+      font-weight: 600;
+      color: #6A7A8A;
+      line-height: 1.6;
+    }
+
+    /* outer: centers when content fits, scrolls when it doesn't */
+    .screenshots-outer {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0 40px;
+      /* hide scrollbar visually but keep it functional */
+      scrollbar-width: none;
+    }
+    .screenshots-outer::-webkit-scrollbar { display: none; }
+
+    /* inner: the zoomed row of screens */
+    .screenshots-inner {
+      display: flex;
+      gap: 24px;
+      padding: 20px 60px 40px;
+      zoom: 0.58;
+      flex-shrink: 0;
+      align-items: flex-start;
+    }
+
+    /* ─────────────────────────────────────────
+       APP STORE SCREENS CSS (identical to app-store-screens.html)
+    ───────────────────────────────────────── */
+    .screen-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .screen {
+      width: 390px;
+      height: 844px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.7);
+    }
+
+    .phone {
+      position: relative;
+      background: #141414;
+      border-radius: 48px;
+      padding: 11px;
+      box-shadow:
+        0 0 0 1px #2C2C2C,
+        0 40px 100px rgba(0,0,0,0.5),
+        inset 0 0 0 2px rgba(255,255,255,0.04);
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 88px;
+      height: 26px;
+      background: #000;
+      border-radius: 18px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      border-radius: 38px;
+      overflow: hidden;
+      background: #E5E5EA;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      display: block;
+    }
+
+    .tag {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 0 16px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.35;
+    }
+
+    .diamond {
+      width: 7px;
+      height: 7px;
+      background: currentColor;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* Screen 1 */
+    .s1 { background: linear-gradient(158deg, #FEF8EE 0%, #F5E9CF 55%, #EDDAB4 100%); }
+
+    .s1-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 340px;
+      background: linear-gradient(to bottom, transparent, rgba(237,218,180,0.75) 32%, #EDDAB4 56%);
+      z-index: 4;
+    }
+
+    .s1-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 5;
+      text-align: center;
+      padding: 28px 38px 38px;
+    }
+
+    .s1-text .tag   { color: #B07D2E; }
+    .s1-text .divider { color: #B07D2E; }
+
+    .s1-headline { font-size: 46px; font-weight: 900; color: #2C1A06; line-height: 1.08; margin-bottom: 14px; }
+    .s1-sub { font-size: 16px; font-weight: 600; color: #7A5428; line-height: 1.65; }
+
+    /* Screen 2 */
+    .s2 { background: linear-gradient(162deg, #FFFBF0 0%, #F9EDCC 100%); }
+
+    .s2-cards {
+      position: absolute;
+      top: 16px; left: 0; right: 0;
+      height: 580px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .s2-stack { position: relative; width: 320px; height: 560px; }
+
+    .s2-stack img {
+      position: absolute;
+      filter: drop-shadow(0 18px 44px rgba(90,50,0,0.24));
+    }
+
+    .s2-stack img:nth-child(1) { width: 222px; left: 0; bottom: 10px; transform: rotate(-11deg); z-index: 1; }
+    .s2-stack img:nth-child(2) { width: 222px; right: 0; bottom: 10px; transform: rotate(10deg); z-index: 1; }
+    .s2-stack img:nth-child(3) { width: 240px; top: 28px; left: 50%; transform: translateX(-50%); z-index: 3; }
+
+    .s1-back:nth-child(1) { left: -12px; }
+    .s1-back:nth-child(2) { right: -12px; }
+
+    .s2-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 300px;
+      background: linear-gradient(to bottom, transparent, rgba(249,237,204,0.75) 32%, #F9EDCC 56%);
+      z-index: 4;
+    }
+
+    .s2-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 5;
+      text-align: center;
+      padding: 0 38px 58px;
+    }
+
+    .s2-text .tag   { color: #B07D2E; }
+    .s2-text .divider { color: #B07D2E; }
+    .s2-headline { font-size: 42px; font-weight: 900; color: #2C1A06; line-height: 1.1; margin-bottom: 14px; }
+    .s2-sub { font-size: 16px; font-weight: 600; color: #7A5428; line-height: 1.65; }
+
+    /* Screen 3 */
+    .s3 { background: linear-gradient(158deg, #EEF6EE 0%, #D5EBD7 48%, #BCE0BE 100%); }
+
+    .s3-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
+    .s3-text .tag   { color: #2A7A2E; }
+    .s3-text .divider { color: #2A7A2E; }
+    .s3-headline { font-size: 42px; font-weight: 900; color: #19391A; line-height: 1.1; margin-bottom: 12px; }
+    .s3-sub { font-size: 15px; font-weight: 600; color: #3A6440; line-height: 1.6; }
+
+    .s3-phone { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); z-index: 3; }
+    .s3-phone .phone { width: 258px; }
+
+    /* Screen 4 */
+    .s4 { background: linear-gradient(158deg, #FFF6EE 0%, #FFE5C8 50%, #FFD0A0 100%); }
+
+    .s4-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
+    .s4-text .tag   { color: #C84C08; }
+    .s4-text .divider { color: #C84C08; }
+    .s4-headline { font-size: 42px; font-weight: 900; color: #2C1000; line-height: 1.1; margin-bottom: 12px; }
+    .s4-sub { font-size: 15px; font-weight: 600; color: #7A3808; line-height: 1.6; }
+
+    .s4-phone { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); z-index: 3; }
+    .s4-phone .phone { width: 258px; }
+
+    /* Screen 5 */
+    .s5 { background: linear-gradient(158deg, #1C2236 0%, #0D1220 100%); }
+
+    .s5-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
+    .s5-text .tag   { color: #5AABF0; }
+    .s5-text .divider { color: #5AABF0; }
+    .s5-headline { font-size: 42px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 12px; }
+    .s5-sub { font-size: 15px; font-weight: 600; color: #6880A0; line-height: 1.6; }
+
+    .s5-phone-back { position: absolute; bottom: 32px; left: 14px; z-index: 1; }
+    .s5-phone-back .phone { width: 214px; transform: rotate(-6deg); transform-origin: bottom center; opacity: 0.88; }
+    .s5-phone-front { position: absolute; bottom: 32px; right: 8px; z-index: 2; }
+    .s5-phone-front .phone { width: 234px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--cream-mid);
+      border-top: 1px solid rgba(200,148,58,0.2);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown-mid);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">Onigiri Sensei</a>
+    <ul class="nav-links">
+      <li><a href="/privacy-policy">Privacy Policy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-badge">Now available on iOS</span>
+      <h1 class="hero-h1">Japanese<br>that sticks.</h1>
+      <p class="hero-sub">
+        Meet your new Japanese tutor. He's adorable,
+        he's dedicated, and he's made of rice.
+      </p>
+      <a class="app-store-btn" href="#">
+        <svg viewBox="0 0 814 1000" xmlns="http://www.w3.org/2000/svg">
+          <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 187.8-49 30.5 0 108.2 2.6 168.1 80.6zm-80.6-111.7c0-50.3 39-103.7 95.5-133.7-37.6-51.6-96.1-87-160.6-87-61.6 0-125.4 40.8-158.4 40.8-35.7 0-90.8-38.3-158.4-38.3-112.3 0-235.6 91.5-235.6 269.2 0 24.4 3.2 49.6 7.1 75.2 38.3-14.5 78.4-22.9 111.3-22.9 61.6 0 116 34.5 154.9 34.5 42.8 0 87.5-36.9 161-36.9 66.8 0 147.5 41.4 183.2 99.3z"/>
+        </svg>
+        Download on the App Store
+      </a>
+    </div>
+
+    <div class="hero-cards">
+      <Image src={cardOkiru} width={300} alt="To wake up card" />
+      <Image src={cardImasu} width={300} alt="To exist card" />
+      <Image src={cardHanasu} width={300} alt="To speak card" />
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots-section">
+    <div class="screenshots-heading">
+      <h2>Everything you need<br>to master Japanese</h2>
+      <p>Study, drill conjugations, quiz yourself — and track your progress.</p>
+    </div>
+
+    <div class="screenshots-outer">
+      <div class="screenshots-inner">
+
+        <!-- Screen 1: Hero -->
+        <div class="screen-wrap">
+          <div class="screen s1">
+            <div class="s2-cards">
+              <div class="s2-stack">
+                <Image class="s1-back" src={cardHanasu} width={224} alt="" />
+                <Image class="s1-back" src={cardOokii}  width={224} alt="" />
+                <Image src={cardIku} width={242} alt="" />
+              </div>
+            </div>
+            <div class="s1-fade"></div>
+            <div class="s1-text">
+              <span class="tag">Onigiri Sensei</span>
+              <div class="divider"><span class="diamond"></span></div>
+              <h2 class="s1-headline">Japanese<br>that sticks.</h2>
+              <p class="s1-sub">Illustrated vocabulary cards<br>with your adorable rice ball sensei.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Vocabulary -->
+        <div class="screen-wrap">
+          <div class="screen s2">
+            <div class="s2-cards">
+              <div class="s2-stack">
+                <Image src={cardMiru}  width={224} alt="" />
+                <Image src={cardOkiru} width={224} alt="" />
+                <Image src={cardImasu} width={242} alt="" />
+              </div>
+            </div>
+            <div class="s2-fade"></div>
+            <div class="s2-text">
+              <span class="tag">Vocabulary</span>
+              <div class="divider"><span class="diamond"></span></div>
+              <h2 class="s2-headline">Every word,<br>illustrated.</h2>
+              <p class="s2-sub">Vivid scenes make vocabulary<br>impossible to forget.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 3: Conjugation -->
+        <div class="screen-wrap">
+          <div class="screen s3">
+            <div class="s3-text">
+              <span class="tag">Conjugation</span>
+              <div class="divider"><span class="diamond"></span></div>
+              <h2 class="s3-headline">More than<br>flashcards.</h2>
+              <p class="s3-sub">Plain, polite, past, te, tai — drill<br>every form you actually need.</p>
+            </div>
+            <div class="s3-phone">
+              <div class="phone">
+                <div class="phone-screen">
+                  <Image src={screenCardFlipped} width={258} alt="Conjugation screen" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 4: Quiz -->
+        <div class="screen-wrap">
+          <div class="screen s4">
+            <div class="s4-text">
+              <span class="tag">Quiz Mode</span>
+              <div class="divider"><span class="diamond"></span></div>
+              <h2 class="s4-headline">Test what<br>you know.</h2>
+              <p class="s4-sub">Four choices. One right answer.<br>No cheating yourself.</p>
+            </div>
+            <div class="s4-phone">
+              <div class="phone">
+                <div class="phone-screen">
+                  <Image src={screenQuiz} width={258} alt="Quiz screen" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 5: Progress -->
+        <div class="screen-wrap">
+          <div class="screen s5">
+            <div class="s5-text">
+              <span class="tag">Progress</span>
+              <div class="divider"><span class="diamond"></span></div>
+              <h2 class="s5-headline">Watch yourself<br>level up.</h2>
+              <p class="s5-sub">Track accuracy, deck mastery,<br>and every word individually.</p>
+            </div>
+            <div class="s5-phone-back">
+              <div class="phone">
+                <div class="phone-screen">
+                  <Image src={screenStatsOverall} width={216} alt="Overall stats" />
+                </div>
+              </div>
+            </div>
+            <div class="s5-phone-front">
+              <div class="phone">
+                <div class="phone-screen">
+                  <Image src={screenStatsWord} width={236} alt="Word stats" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-copy">© 2025 Nite. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="/privacy-policy">Privacy Policy</a></li>
+    </ul>
+  </footer>
+
+</body>
 </html>

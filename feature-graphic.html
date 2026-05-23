@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Onigiri Sensei — Feature Graphic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ── 1024 × 500 — exact Play Store spec ── */
+  .fg {
+    width: 1024px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 78% 55%, rgba(200,148,58,0.18) 0%, transparent 55%),
+      linear-gradient(138deg, #FDF8EE 0%, #F5E9CF 52%, #EDDAB4 100%);
+  }
+
+  /* ── Left text ── */
+  .fg-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 64px;
+    z-index: 3;
+  }
+
+  .fg-tag {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: #B07D2E;
+    margin-bottom: 14px;
+  }
+
+  .fg-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #B07D2E;
+    margin-bottom: 20px;
+  }
+
+  .fg-divider::before,
+  .fg-divider::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.35;
+  }
+
+  .fg-diamond {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    transform: rotate(45deg);
+    opacity: 0.65;
+    flex-shrink: 0;
+  }
+
+  .fg-headline {
+    font-size: 74px;
+    font-weight: 900;
+    color: #2C1A06;
+    line-height: 1.04;
+    margin-bottom: 22px;
+  }
+
+  .fg-bullets {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #7A5428;
+    flex-wrap: wrap;
+  }
+
+  .fg-bullet-sep {
+    opacity: 0.35;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* ── Cards on right ── */
+  .fg-cards {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 560px;
+    z-index: 2;
+  }
+
+  .fg-cards img {
+    position: absolute;
+    filter: drop-shadow(0 22px 55px rgba(90, 50, 0, 0.28));
+  }
+
+  /* Main card — imasu (meditating floating island) */
+  .fg-cards img:nth-child(1) {
+    width: 296px;
+    top: 18px;
+    left: 50px;
+    transform: rotate(-4deg);
+    z-index: 2;
+  }
+
+  /* Back card — hanasu (sunglasses) */
+  .fg-cards img:nth-child(2) {
+    width: 240px;
+    top: 48px;
+    right: 16px;
+    transform: rotate(9deg);
+    z-index: 1;
+  }
+
+  /* soft left-edge fade so cards blend into text area */
+  .fg-fade {
+    position: absolute;
+    left: 400px;
+    top: 0;
+    width: 160px;
+    bottom: 0;
+    background: linear-gradient(to right, #F5E9CF, transparent);
+    z-index: 4;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="fg">
+
+  <div class="fg-text">
+    <div class="fg-tag">Onigiri Sensei</div>
+    <div class="fg-divider"><span class="fg-diamond"></span></div>
+    <h1 class="fg-headline">Japanese<br>that sticks.</h1>
+    <div class="fg-bullets">
+      <span>Vocabulary</span>
+      <span class="fg-bullet-sep">·</span>
+      <span>Conjugation</span>
+      <span class="fg-bullet-sep">·</span>
+      <span>Quizzes</span>
+    </div>
+  </div>
+
+  <div class="fg-cards">
+    <img src="src/assets/card-imasu.png" alt="">
+    <img src="src/assets/card-hanasu.png" alt="">
+  </div>
+
+  <div class="fg-fade"></div>
+
+</div>
+
+</body>
+</html>
