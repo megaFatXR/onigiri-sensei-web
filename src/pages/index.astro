@@ -1,14 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import cardHanasu from '../assets/card-hanasu.png';
-import cardIku from '../assets/card-iku.png';
 import cardImasu from '../assets/card-imasu.png';
-import cardMiru from '../assets/card-miru.png';
+import cardJitensha from '../assets/card-jitensha.png';
+import cardTakushii from '../assets/card-takushii.png';
 import cardOkiru from '../assets/card-okiru.png';
-import cardOokii from '../assets/card-ookii.png';
 import screenCardFlipped from '../assets/screen-card-flipped.png';
 import screenQuiz from '../assets/screen-quiz.png';
-import screenStatsOverall from '../assets/screen-stats-overall.png';
 import screenStatsWord from '../assets/screen-stats-word.png';
 
 const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
@@ -17,12 +15,42 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="generator" content={Astro.generator} />
   <title>Onigiri Sensei — Learn Japanese</title>
   <meta name="description" content="Learn Japanese with Onigiri Sensei — illustrated vocabulary cards and conjugation drills with your adorable rice ball guide." />
+  <link rel="canonical" href="https://onigirisensei.app/" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="apple-itunes-app" content="app-id=6770698062" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://onigirisensei.app/" />
+  <meta property="og:site_name" content="Onigiri Sensei" />
+  <meta property="og:title" content="Onigiri Sensei — Learn Japanese" />
+  <meta property="og:description" content="Illustrated vocabulary cards, conjugation drills, quizzes and progress tracking — with your adorable rice ball sensei. Now on iOS." />
+  <meta property="og:image" content="https://onigirisensei.app/og-image.jpg" />
+  <meta property="og:image:width" content="2400" />
+  <meta property="og:image:height" content="1260" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Onigiri Sensei — Learn Japanese" />
+  <meta name="twitter:description" content="Illustrated vocabulary cards, conjugation drills, quizzes and progress tracking — with your adorable rice ball sensei. Now on iOS." />
+  <meta name="twitter:image" content="https://onigirisensei.app/og-image.jpg" />
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'Onigiri Sensei',
+    operatingSystem: 'iOS',
+    applicationCategory: 'EducationalApplication',
+    description: 'Learn Japanese with illustrated vocabulary cards, conjugation drills, quizzes and progress tracking.',
+    url: 'https://onigirisensei.app/',
+    installUrl: appStoreUrl,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  })} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -90,6 +118,8 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
 
     /* ─── HERO ─── */
     .hero {
+      position: relative;
+      overflow: hidden;
       min-height: calc(100vh - 60px);
       background: linear-gradient(150deg, #FEF8EE 0%, var(--cream-mid) 55%, var(--cream-deep) 100%);
       display: flex;
@@ -99,9 +129,36 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
       gap: 60px;
     }
 
+    /* ambient oversized kana behind the content */
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(176, 125, 46, 0.07);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero::before {
+      content: 'あ';
+      font-size: clamp(280px, 38vw, 560px);
+      top: -60px;
+      right: -70px;
+    }
+
+    .hero::after {
+      content: '語';
+      font-size: clamp(200px, 26vw, 380px);
+      bottom: -70px;
+      left: -50px;
+    }
+
     .hero-text {
       max-width: 500px;
       flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-badge {
@@ -196,60 +253,120 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
       max-width: 90px;
     }
 
+    /* feature chips under the CTA */
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      margin-top: 28px;
+    }
+
+    .hero-features li {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(200, 148, 58, 0.25);
+      border-radius: 999px;
+      padding: 7px 14px;
+    }
+
     /* hero cards — floating fan on the right */
     .hero-cards {
       position: relative;
-      width: 340px;
-      height: 420px;
+      z-index: 1;
+      width: 660px;
+      height: 510px;
       flex-shrink: 0;
     }
 
     .hero-cards img {
       position: absolute;
+      height: auto;
       filter: drop-shadow(0 20px 50px rgba(90, 50, 0, 0.22));
+      --tx: 0px;
+      --r: 0deg;
+      transform: translateX(var(--tx)) rotate(var(--r));
+      animation: card-float 7s ease-in-out infinite;
+    }
+
+    @keyframes card-float {
+      0%, 100% { transform: translateX(var(--tx)) rotate(var(--r)) translateY(0); }
+      50%      { transform: translateX(var(--tx)) rotate(var(--r)) translateY(-12px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-cards img { animation: none; }
     }
 
     .hero-cards img:nth-child(1) {
-      width: 200px;
-      left: 0;
-      bottom: 0;
-      transform: rotate(-10deg);
-      z-index: 1;
+      width: 225px;
+      left: -10px;
+      bottom: 32px;
+      --r: -16deg;
+      z-index: 3;
+      animation-delay: -1.5s;
     }
 
     .hero-cards img:nth-child(2) {
-      width: 230px;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      z-index: 3;
+      width: 255px;
+      left: 105px;
+      bottom: 0;
+      --r: -7deg;
+      z-index: 2;
+      animation-delay: -4.5s;
     }
 
     .hero-cards img:nth-child(3) {
-      width: 200px;
-      right: 0;
-      bottom: 0;
-      transform: rotate(10deg);
+      width: 250px;
+      left: 50%;
+      top: 0;
+      --tx: -50%;
       z-index: 1;
     }
 
-    /* hide cards on small screens */
+    .hero-cards img:nth-child(4) {
+      width: 255px;
+      right: 105px;
+      bottom: 0;
+      --r: 7deg;
+      z-index: 2;
+      animation-delay: -3s;
+    }
+
+    .hero-cards img:nth-child(5) {
+      width: 225px;
+      right: -10px;
+      bottom: 32px;
+      --r: 16deg;
+      z-index: 3;
+      animation-delay: -6s;
+    }
+
+    /* tighter 3-card fan on small screens */
     @media (max-width: 860px) {
       .hero { flex-direction: column; text-align: center; }
+      .hero::before { font-size: 280px; top: -40px; right: -90px; }
+      .hero::after { font-size: 200px; bottom: -50px; left: -70px; }
       .hero-text { max-width: 100%; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-cta { justify-content: center; }
-      .hero-qr-label { text-align: left; }
-      .hero-cards { width: 280px; height: 340px; }
-      .hero-cards img:nth-child(2) { width: 190px; }
+      .hero-qr { display: none; }
+      .hero-features { justify-content: center; }
+      .hero-cards { order: -1; width: 340px; height: 400px; max-width: 100%; }
       .hero-cards img:nth-child(1),
-      .hero-cards img:nth-child(3) { width: 165px; }
+      .hero-cards img:nth-child(5) { display: none; }
+      .hero-cards img:nth-child(2) { width: 185px; left: 0; }
+      .hero-cards img:nth-child(3) { width: 220px; }
+      .hero-cards img:nth-child(4) { width: 185px; right: 0; }
     }
 
     /* ─── SCREENSHOTS SECTION ─── */
     .screenshots-section {
       background: var(--dark);
       padding: 80px 0 100px;
+      overflow: hidden;
     }
 
     .screenshots-heading {
@@ -271,49 +388,6 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
       font-weight: 600;
       color: #6A7A8A;
       line-height: 1.6;
-    }
-
-    /* outer: centers when content fits, scrolls when it doesn't */
-    .screenshots-outer {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      display: flex;
-      justify-content: center;
-      padding: 20px 0 40px;
-      /* hide scrollbar visually but keep it functional */
-      scrollbar-width: none;
-    }
-    .screenshots-outer::-webkit-scrollbar { display: none; }
-
-    /* inner: the zoomed row of screens */
-    .screenshots-inner {
-      display: flex;
-      gap: 24px;
-      padding: 20px 60px 40px;
-      zoom: 0.58;
-      flex-shrink: 0;
-      align-items: flex-start;
-    }
-
-    /* ─────────────────────────────────────────
-       APP STORE SCREENS CSS (identical to app-store-screens.html)
-    ───────────────────────────────────────── */
-    .screen-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .screen {
-      width: 390px;
-      height: 844px;
-      border-radius: 24px;
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      box-shadow: 0 8px 60px rgba(0,0,0,0.7);
     }
 
     .phone {
@@ -360,141 +434,110 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
       margin-bottom: 10px;
     }
 
-    .divider {
+
+    /* ─── FEATURES GRID (image beside text; 2×2 desktop, stacked mobile) ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .feature-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 0 0 16px;
+      gap: 26px;
+      border-radius: 24px;
+      padding: 30px 28px;
     }
 
-    .divider::before,
-    .divider::after {
-      content: '';
-      width: 36px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.35;
+    .feature-row:nth-child(even) { flex-direction: row-reverse; }
+
+    /* media breaks out of the box edges, sticker-style */
+    .feature-media {
+      flex: 0 0 38%;
+      max-width: 210px;
+      margin: -22px 0;
+      position: relative;
+      z-index: 1;
     }
 
-    .diamond {
-      width: 7px;
-      height: 7px;
-      background: currentColor;
-      transform: rotate(45deg);
-      opacity: 0.7;
-      flex-shrink: 0;
+    .feature-row:nth-child(odd) .feature-media { margin-left: -52px; }
+    .feature-row:nth-child(even) .feature-media { margin-right: -52px; }
+
+    .feature-media img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    /* Screen 1 */
-    .s1 { background: linear-gradient(158deg, #FEF8EE 0%, #F5E9CF 55%, #EDDAB4 100%); }
-
-    .s1-fade {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 340px;
-      background: linear-gradient(to bottom, transparent, rgba(237,218,180,0.75) 32%, #EDDAB4 56%);
-      z-index: 4;
+    .feature-card {
+      transform: rotate(-5deg);
+      filter: drop-shadow(0 10px 24px rgba(90, 50, 0, 0.25));
     }
 
-    .s1-text {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 5;
-      text-align: center;
-      padding: 28px 38px 38px;
+    .feature-media .phone {
+      border-radius: 26px;
+      padding: 6px;
+      transform: rotate(4deg);
     }
 
-    .s1-text .tag   { color: #B07D2E; }
-    .s1-text .divider { color: #B07D2E; }
+    .feature-row:nth-child(even) .feature-media .phone { transform: rotate(-4deg); }
+    .feature-row:nth-child(4) .feature-media .phone { transform: rotate(4deg); }
 
-    .s1-headline { font-size: 46px; font-weight: 900; color: #2C1A06; line-height: 1.08; margin-bottom: 14px; }
-    .s1-sub { font-size: 16px; font-weight: 600; color: #7A5428; line-height: 1.65; }
-
-    /* Screen 2 */
-    .s2 { background: linear-gradient(162deg, #FFFBF0 0%, #F9EDCC 100%); }
-
-    .s2-cards {
-      position: absolute;
-      top: 16px; left: 0; right: 0;
-      height: 580px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
+    .feature-media .phone::before {
+      top: 9px;
+      width: 40px;
+      height: 12px;
+      border-radius: 8px;
     }
 
-    .s2-stack { position: relative; width: 320px; height: 560px; }
+    .feature-media .phone-screen { border-radius: 20px; }
 
-    .s2-stack img {
-      position: absolute;
-      filter: drop-shadow(0 18px 44px rgba(90,50,0,0.24));
+    .feature-copy { flex: 1; min-width: 0; }
+    .feature-copy .tag { font-size: 13px; letter-spacing: 2.5px; margin-bottom: 8px; }
+    .feature-copy h3 { font-size: 26px; font-weight: 900; line-height: 1.15; margin-bottom: 10px; }
+    .feature-copy p { font-size: 15px; font-weight: 600; line-height: 1.6; }
+
+    .f-vocab { background: linear-gradient(162deg, #FFFBF0 0%, #F9EDCC 100%); }
+    .f-vocab .tag { color: #B07D2E; }
+    .f-vocab h3 { color: #2C1A06; }
+    .f-vocab p { color: #7A5428; }
+
+    .f-conj { background: linear-gradient(158deg, #EEF6EE 0%, #BCE0BE 100%); }
+    .f-conj .tag { color: #2A7A2E; }
+    .f-conj h3 { color: #19391A; }
+    .f-conj p { color: #3A6440; }
+
+    .f-quiz { background: linear-gradient(158deg, #FFF6EE 0%, #FFD0A0 100%); }
+    .f-quiz .tag { color: #C84C08; }
+    .f-quiz h3 { color: #2C1000; }
+    .f-quiz p { color: #7A3808; }
+
+    .f-progress { background: linear-gradient(158deg, #1C2236 0%, #0D1220 100%); }
+    .f-progress .tag { color: #5AABF0; }
+    .f-progress h3 { color: #fff; }
+    .f-progress p { color: #8FA4C0; }
+
+    @media (max-width: 860px) {
+      .screenshots-section { padding: 56px 0 64px; }
+      .screenshots-heading { margin-bottom: 36px; padding: 0 24px; }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 20px;
+      }
+
+      .feature-row { gap: 20px; padding: 24px 20px; }
+      .feature-media { max-width: 170px; margin: -14px 0; }
+      .feature-row:nth-child(odd) .feature-media { margin-left: -34px; }
+      .feature-row:nth-child(even) .feature-media { margin-right: -34px; }
+      .feature-copy h3 { font-size: 22px; margin-bottom: 8px; }
+      .feature-copy p { font-size: 14px; line-height: 1.55; }
     }
-
-    .s2-stack img:nth-child(1) { width: 222px; left: 0; bottom: 10px; transform: rotate(-11deg); z-index: 1; }
-    .s2-stack img:nth-child(2) { width: 222px; right: 0; bottom: 10px; transform: rotate(10deg); z-index: 1; }
-    .s2-stack img:nth-child(3) { width: 240px; top: 28px; left: 50%; transform: translateX(-50%); z-index: 3; }
-
-    .s1-back:nth-child(1) { left: -12px; }
-    .s1-back:nth-child(2) { right: -12px; }
-
-    .s2-fade {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 300px;
-      background: linear-gradient(to bottom, transparent, rgba(249,237,204,0.75) 32%, #F9EDCC 56%);
-      z-index: 4;
-    }
-
-    .s2-text {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 5;
-      text-align: center;
-      padding: 0 38px 58px;
-    }
-
-    .s2-text .tag   { color: #B07D2E; }
-    .s2-text .divider { color: #B07D2E; }
-    .s2-headline { font-size: 42px; font-weight: 900; color: #2C1A06; line-height: 1.1; margin-bottom: 14px; }
-    .s2-sub { font-size: 16px; font-weight: 600; color: #7A5428; line-height: 1.65; }
-
-    /* Screen 3 */
-    .s3 { background: linear-gradient(158deg, #EEF6EE 0%, #D5EBD7 48%, #BCE0BE 100%); }
-
-    .s3-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
-    .s3-text .tag   { color: #2A7A2E; }
-    .s3-text .divider { color: #2A7A2E; }
-    .s3-headline { font-size: 42px; font-weight: 900; color: #19391A; line-height: 1.1; margin-bottom: 12px; }
-    .s3-sub { font-size: 15px; font-weight: 600; color: #3A6440; line-height: 1.6; }
-
-    .s3-phone { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); z-index: 3; }
-    .s3-phone .phone { width: 258px; }
-
-    /* Screen 4 */
-    .s4 { background: linear-gradient(158deg, #FFF6EE 0%, #FFE5C8 50%, #FFD0A0 100%); }
-
-    .s4-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
-    .s4-text .tag   { color: #C84C08; }
-    .s4-text .divider { color: #C84C08; }
-    .s4-headline { font-size: 42px; font-weight: 900; color: #2C1000; line-height: 1.1; margin-bottom: 12px; }
-    .s4-sub { font-size: 15px; font-weight: 600; color: #7A3808; line-height: 1.6; }
-
-    .s4-phone { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); z-index: 3; }
-    .s4-phone .phone { width: 258px; }
-
-    /* Screen 5 */
-    .s5 { background: linear-gradient(158deg, #1C2236 0%, #0D1220 100%); }
-
-    .s5-text { position: absolute; top: 0; left: 0; right: 0; padding: 56px 38px 0; text-align: center; z-index: 5; }
-    .s5-text .tag   { color: #5AABF0; }
-    .s5-text .divider { color: #5AABF0; }
-    .s5-headline { font-size: 42px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 12px; }
-    .s5-sub { font-size: 15px; font-weight: 600; color: #6880A0; line-height: 1.6; }
-
-    .s5-phone-back { position: absolute; bottom: 32px; left: 14px; z-index: 1; }
-    .s5-phone-back .phone { width: 214px; transform: rotate(-6deg); transform-origin: bottom center; opacity: 0.88; }
-    .s5-phone-front { position: absolute; bottom: 32px; right: 8px; z-index: 2; }
-    .s5-phone-front .phone { width: 234px; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -567,12 +610,20 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
           <span class="hero-qr-label">Scan to download</span>
         </a>
       </div>
+      <ul class="hero-features">
+        <li>Illustrated vocabulary cards</li>
+        <li>Conjugation drills</li>
+        <li>Quiz mode</li>
+        <li>Progress tracking</li>
+      </ul>
     </div>
 
     <div class="hero-cards">
-      <Image src={cardOkiru} width={300} alt="To wake up card" />
-      <Image src={cardImasu} width={300} alt="To exist card" />
-      <Image src={cardHanasu} width={300} alt="To speak card" />
+      <Image src={cardJitensha} width={225} densities={[1, 2, 3]} quality={90} alt="Bicycle card" />
+      <Image src={cardOkiru} width={255} densities={[1, 2, 3]} quality={90} alt="To wake up card" />
+      <Image src={cardImasu} width={250} densities={[1, 2, 3]} quality={90} alt="To exist card" />
+      <Image src={cardHanasu} width={255} densities={[1, 2, 3]} quality={90} alt="To speak card" />
+      <Image src={cardTakushii} width={225} densities={[1, 2, 3]} quality={90} alt="Taxi card" />
     </div>
   </section>
 
@@ -583,114 +634,65 @@ const appStoreUrl = 'https://apps.apple.com/us/app/onigiri-sensei/id6770698062';
       <p>Study, drill conjugations, quiz yourself — and track your progress.</p>
     </div>
 
-    <div class="screenshots-outer">
-      <div class="screenshots-inner">
+    <!-- feature grid: 2×2 on desktop, stacked on mobile -->
+    <div class="features-grid">
 
-        <!-- Screen 1: Hero -->
-        <div class="screen-wrap">
-          <div class="screen s1">
-            <div class="s2-cards">
-              <div class="s2-stack">
-                <Image class="s1-back" src={cardHanasu} width={224} alt="" />
-                <Image class="s1-back" src={cardOokii}  width={224} alt="" />
-                <Image src={cardIku} width={242} alt="" />
-              </div>
-            </div>
-            <div class="s1-fade"></div>
-            <div class="s1-text">
-              <span class="tag">Onigiri Sensei</span>
-              <div class="divider"><span class="diamond"></span></div>
-              <h2 class="s1-headline">Japanese<br>that sticks.</h2>
-              <p class="s1-sub">Illustrated vocabulary cards<br>with your adorable rice ball sensei.</p>
+      <article class="feature-row f-vocab">
+        <div class="feature-media">
+          <Image class="feature-card" src={cardImasu} width={200} densities={[1, 2, 3]} quality={90} alt="Illustrated vocabulary card" />
+        </div>
+        <div class="feature-copy">
+          <span class="tag">Vocabulary</span>
+          <h3>Every word, illustrated.</h3>
+          <p>Vivid scenes make vocabulary impossible to forget.</p>
+        </div>
+      </article>
+
+      <article class="feature-row f-conj">
+        <div class="feature-media">
+          <div class="phone">
+            <div class="phone-screen">
+              <Image src={screenCardFlipped} width={200} densities={[1, 2, 3]} quality={90} alt="Conjugation screen" />
             </div>
           </div>
         </div>
+        <div class="feature-copy">
+          <span class="tag">Conjugation</span>
+          <h3>More than flashcards.</h3>
+          <p>Plain, polite, past, te, tai — drill every form you actually need.</p>
+        </div>
+      </article>
 
-        <!-- Screen 2: Vocabulary -->
-        <div class="screen-wrap">
-          <div class="screen s2">
-            <div class="s2-cards">
-              <div class="s2-stack">
-                <Image src={cardMiru}  width={224} alt="" />
-                <Image src={cardOkiru} width={224} alt="" />
-                <Image src={cardImasu} width={242} alt="" />
-              </div>
-            </div>
-            <div class="s2-fade"></div>
-            <div class="s2-text">
-              <span class="tag">Vocabulary</span>
-              <div class="divider"><span class="diamond"></span></div>
-              <h2 class="s2-headline">Every word,<br>illustrated.</h2>
-              <p class="s2-sub">Vivid scenes make vocabulary<br>impossible to forget.</p>
+      <article class="feature-row f-quiz">
+        <div class="feature-media">
+          <div class="phone">
+            <div class="phone-screen">
+              <Image src={screenQuiz} width={200} densities={[1, 2, 3]} quality={90} alt="Quiz screen" />
             </div>
           </div>
         </div>
+        <div class="feature-copy">
+          <span class="tag">Quiz Mode</span>
+          <h3>Test what you know.</h3>
+          <p>Four choices. One right answer. No cheating yourself.</p>
+        </div>
+      </article>
 
-        <!-- Screen 3: Conjugation -->
-        <div class="screen-wrap">
-          <div class="screen s3">
-            <div class="s3-text">
-              <span class="tag">Conjugation</span>
-              <div class="divider"><span class="diamond"></span></div>
-              <h2 class="s3-headline">More than<br>flashcards.</h2>
-              <p class="s3-sub">Plain, polite, past, te, tai — drill<br>every form you actually need.</p>
-            </div>
-            <div class="s3-phone">
-              <div class="phone">
-                <div class="phone-screen">
-                  <Image src={screenCardFlipped} width={258} alt="Conjugation screen" />
-                </div>
-              </div>
+      <article class="feature-row f-progress">
+        <div class="feature-media">
+          <div class="phone">
+            <div class="phone-screen">
+              <Image src={screenStatsWord} width={200} densities={[1, 2, 3]} quality={90} alt="Word stats screen" />
             </div>
           </div>
         </div>
-
-        <!-- Screen 4: Quiz -->
-        <div class="screen-wrap">
-          <div class="screen s4">
-            <div class="s4-text">
-              <span class="tag">Quiz Mode</span>
-              <div class="divider"><span class="diamond"></span></div>
-              <h2 class="s4-headline">Test what<br>you know.</h2>
-              <p class="s4-sub">Four choices. One right answer.<br>No cheating yourself.</p>
-            </div>
-            <div class="s4-phone">
-              <div class="phone">
-                <div class="phone-screen">
-                  <Image src={screenQuiz} width={258} alt="Quiz screen" />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="feature-copy">
+          <span class="tag">Progress</span>
+          <h3>Watch yourself level up.</h3>
+          <p>Track accuracy, deck mastery, and every word individually.</p>
         </div>
+      </article>
 
-        <!-- Screen 5: Progress -->
-        <div class="screen-wrap">
-          <div class="screen s5">
-            <div class="s5-text">
-              <span class="tag">Progress</span>
-              <div class="divider"><span class="diamond"></span></div>
-              <h2 class="s5-headline">Watch yourself<br>level up.</h2>
-              <p class="s5-sub">Track accuracy, deck mastery,<br>and every word individually.</p>
-            </div>
-            <div class="s5-phone-back">
-              <div class="phone">
-                <div class="phone-screen">
-                  <Image src={screenStatsOverall} width={216} alt="Overall stats" />
-                </div>
-              </div>
-            </div>
-            <div class="s5-phone-front">
-              <div class="phone">
-                <div class="phone-screen">
-                  <Image src={screenStatsWord} width={236} alt="Word stats" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://onigirisensei.app/sitemap-index.xml
