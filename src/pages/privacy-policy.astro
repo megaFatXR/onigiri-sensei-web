@@ -1,6 +1,6 @@
 ---
 import niteLogo from '../assets/nite-logo.png';
-const lastUpdated = "May 20, 2025";
+const lastUpdated = "July 3, 2026";
 ---
 
 <html lang="en">
@@ -121,7 +121,7 @@ const lastUpdated = "May 20, 2025";
       </header>
 
       <div class="highlight-box">
-        <strong>Short version:</strong> Onigiri Sensei does not collect personal information. Your learning progress, settings, and nickname stay on your device. We use standard third-party services (Firebase, AdMob) for analytics, crash reporting, and advertising.
+        <strong>Short version:</strong> Onigiri Sensei does not collect personal information. Your learning progress, settings, and nickname stay on your device. We use standard third-party services (Firebase, Appodeal) for analytics, crash reporting, and advertising.
       </div>
 
       <div class="section">
@@ -160,15 +160,18 @@ const lastUpdated = "May 20, 2025";
         <p>Crashlytics collects crash reports when the app unexpectedly closes. Reports include stack traces and device state at the time of the crash (OS version, device model, memory state). No personal information is included in crash reports.</p>
         <p><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy →</a></p>
 
-        <h2>Google AdMob</h2>
-        <p>We display ads through Google AdMob to support the free version of the app. AdMob may collect:</p>
+        <h2>Appodeal (Advertising)</h2>
+        <p>We display ads through Appodeal, an ad mediation platform, to support the free version of the app. Appodeal and the third-party ad networks it works with may collect:</p>
         <ul>
           <li>Your device's advertising identifier (IDFA on iOS, GAID on Android)</li>
+          <li>Your IP address</li>
+          <li>Approximate location (derived from your IP address)</li>
+          <li>General device information (device model, OS version)</li>
           <li>Ad interaction data (impressions, clicks)</li>
-          <li>Approximate location (derived from IP address)</li>
         </ul>
-        <p>On iOS, we request permission to use your advertising identifier via Apple's App Tracking Transparency prompt. You may decline, and the app will still work — you will simply see non-personalized ads.</p>
-        <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></p>
+        <p>Appodeal works with a number of third-party advertising partners that may process this information to select, deliver, and measure ads. This data is handled by Appodeal and its partners under their own privacy policies.</p>
+        <p>On iOS, we request permission to use your advertising identifier via Apple's App Tracking Transparency prompt. If you are in the EU/EEA or the UK, a consent dialog is also shown before any personalized ads are served. You may decline in either case, and the app will still work — you will simply see non-personalized ads.</p>
+        <p><a href="https://appodeal.com/privacy-policy/" target="_blank" rel="noopener">Appodeal Privacy Policy →</a></p>
 
         <h2>In-App Purchases</h2>
         <p>Purchases are processed entirely by the Google Play Store or Apple App Store. We do not receive or store your payment information. A record of which decks you have purchased is kept locally on your device.</p>
@@ -182,7 +185,7 @@ const lastUpdated = "May 20, 2025";
       <div class="section">
         <h2>5. Children's Privacy</h2>
         <p>Onigiri Sensei is a Japanese language learning app suitable for all ages. We do not knowingly collect personal information from children under 13. Because the app does not require registration or any personal data to function, it is safe for use by children.</p>
-        <p>Please note that Google AdMob may serve ads to all users. Parents who prefer an ad-free experience can unlock content through in-app purchase.</p>
+        <p>Please note that Appodeal may serve ads to all users. Parents who prefer an ad-free experience can unlock content through in-app purchase.</p>
         <p>If you are a parent or guardian and believe your child has submitted information through the feedback form, please contact us at <a href="mailto:hello@onigirisensei.app">hello@onigirisensei.app</a> and we will delete it promptly.</p>
       </div>
 
