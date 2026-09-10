@@ -14,8 +14,14 @@ bidmachine.io,466,DIRECT
 
 vungle.com,6aa2223521c3522e22b3bcd7,DIRECT,c107d686becd2d77
 
-#ironSource / Unity - LevelPlay - TODO: add the DIRECT line from the LevelPlay dashboard.
-#This is the one that matters most: after cutover it is the primary demand source.
+#ironSource - LevelPlay - primary demand source after cutover.
+#Publisher ID 666585 from LevelPlay > My Account > API.
+
+ironsrc.com, 666585, DIRECT, 79929e88b2ba73bc
+
+#Unity Ads - LevelPlay - TODO. Needs the Unity Developer ID, which is NOT the ironSource
+#publisher ID above and lives in a different dashboard: Unity Operate Dashboard > Invoicing.
+#The line is the domain unity3d.com / that Developer ID / DIRECT / cert id 96cabb5fbdde37a7.
 
 #Mintegral - LevelPlay - TODO: add the DIRECT line once the account is approved.
 
