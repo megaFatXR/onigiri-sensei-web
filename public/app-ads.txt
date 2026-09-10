@@ -1,6 +1,6 @@
-#Updated 31.03.2026
+#Updated 10.09.2026
 
-#Appodeal
+#Appodeal - CURRENT production mediation. Remove this whole block at LevelPlay cutover.
 
 appodeal.com, 265280, DIRECT
 
@@ -10,19 +10,18 @@ bidmachine.io,1,DIRECT
 
 bidmachine.io,466,DIRECT
 
+#Liftoff Monetize (Vungle) - LevelPlay
+
+vungle.com,6aa2223521c3522e22b3bcd7,DIRECT,c107d686becd2d77
+
+#ironSource / Unity - LevelPlay - TODO: add the DIRECT line from the LevelPlay dashboard.
+#This is the one that matters most: after cutover it is the primary demand source.
+
+#Mintegral - LevelPlay - TODO: add the DIRECT line once the account is approved.
+
 #AdMob
 
-#Replace the Publisher_ID below with your Admob Publisher ID
-
-google.com, Publisher_ID, DIRECT, f08c47fec0942fa0
-
-#Meta-Audience
-
-#Replace the Business_ID below with your Meta Business ID
-
-facebook.com,Business_ID,RESELLER,c3e20eee3f780d68
-
-#Add other networks if applicable
+google.com, pub-6761748536909821, DIRECT, f08c47fec0942fa0
 
 #Resellers
 
